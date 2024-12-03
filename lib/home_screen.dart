@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_getx/ScreenOne.dart';
 import 'package:learning_getx/example2Controller.dart';
+import 'package:learning_getx/example3Controller.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -14,7 +15,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   final exampleTwoController ExampleTwoController = Get.put(exampleTwoController());
-  
+  final example3Controller ExampleThreeController = Get.put(example3Controller());
+
   @override
   Widget build(BuildContext context) {
     print('build');
@@ -84,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Get.toNamed('/screenOne');
           }, child: Text('go to next page')),
 
-          //getX state management example 2
+          //getX state management example 1
           Obx(() => Container(
             height: 200,
             width: 200,
@@ -93,7 +95,19 @@ class _HomeScreenState extends State<HomeScreen> {
           Obx(() => Slider(value: ExampleTwoController.opacity.value, onChanged: (value){
             ExampleTwoController.setOpacity(value);
             print(value);
-          }))
+          })),
+
+          //getX state management example 2
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text('Notification'),
+              Obx(() => Switch(value: ExampleThreeController.notificaiton.value, onChanged: (value){
+                ExampleThreeController.notificaiton.value = value;
+                print(value);
+              }))
+            ],
+          )
 
         ],
       ),
