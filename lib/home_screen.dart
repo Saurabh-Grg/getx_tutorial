@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_getx/ScreenOne.dart';
+import 'package:learning_getx/example2Controller.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+
+  HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  final exampleTwoController ExampleTwoController = Get.put(exampleTwoController());
+  
   @override
   Widget build(BuildContext context) {
+    print('build');
     return Scaffold(
       appBar: AppBar(title: Text("getx"),),
       body: Column(
@@ -76,7 +82,18 @@ class _HomeScreenState extends State<HomeScreen> {
           TextButton(onPressed: (){
             // Get.to(Screenone());
             Get.toNamed('/screenOne');
-          }, child: Text('go to next page'))
+          }, child: Text('go to next page')),
+
+          //getX state management example 2
+          Obx(() => Container(
+            height: 200,
+            width: 200,
+            color: Colors.red.withOpacity(ExampleTwoController.opacity.value),
+          ),),
+          Obx(() => Slider(value: ExampleTwoController.opacity.value, onChanged: (value){
+            ExampleTwoController.setOpacity(value);
+            print(value);
+          }))
 
         ],
       ),
